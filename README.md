@@ -11,4 +11,5 @@ composer require marshmallow/commands
 ### Commands
 ```
 env:set {key} {value}
+marshmallow:resource {resource_name?} {package_name?}
 ```
