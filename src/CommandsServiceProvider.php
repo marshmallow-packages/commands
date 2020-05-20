@@ -3,8 +3,8 @@
 namespace Marshmallow\Commands;
 
 use Illuminate\Support\ServiceProvider;
-use Marshmallow\Commands\App\Console\Commands\EnvironmentCommand;
-use Marshmallow\Commands\App\Console\Commands\Nova\ResourceCommand;
+use Marshmallow\Commands\Console\Commands\EnvironmentCommand;
+use Marshmallow\Commands\Console\Commands\Nova\ResourceCommand;
 
 class CommandsServiceProvider extends ServiceProvider
 {
@@ -28,10 +28,12 @@ class CommandsServiceProvider extends ServiceProvider
          * Commands
          */
         if ($this->app->runningInConsole()) {
-            $this->commands([
+            $this->commands(
+                [
                 EnvironmentCommand::class,
                 ResourceCommand::class,
-            ]);
+                ]
+            );
         }
     }
 }
