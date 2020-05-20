@@ -1,9 +1,8 @@
 <?php
 
-namespace Marshmallow\Commands\App\Console\Commands;
-use App\User;
+namespace Marshmallow\Commands\Console\Commands;
+
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
 
 class EnvironmentCommand extends Command
 {
@@ -50,20 +49,18 @@ class EnvironmentCommand extends Command
              * Bestaat nog niet, dus we voegen hem toe.
              */
             $this->add();
-            
         } else {
 
             /**
              * Bestaat al, dus we updaten hem.
              */
             $this->update();
-        
         }
 
         $this->info('.env bestand is gewijzigd.');
     }
 
-    private function add ()
+    private function add()
     {
         $env_file_content = $this->getCurrentEnvFileContents();
         $env_file_content .= "\n";
@@ -71,51 +68,52 @@ class EnvironmentCommand extends Command
         $this->store($env_file_content);
     }
 
-    private function update ()
+    private function update()
     {
         $matches = $this->findEnvVariable();
         $env_file_content = $this->getCurrentEnvFileContents();
         $env_file_content = str_replace(
-            $matches[0], 
-            $this->key . '=' . $this->convertToEnvironmentValue(), 
-        $env_file_content);
+            $matches[0],
+            $this->key . '=' . $this->convertToEnvironmentValue(),
+            $env_file_content
+        );
         $this->store($env_file_content);
     }
 
-    private function envVariableDoesNotExists ()
+    private function envVariableDoesNotExists()
     {
         return (!$this->envVariableExists());
     }
 
-    private function envVariableExists ()
+    private function envVariableExists()
     {
         $matches = $this->findEnvVariable();
         return (!empty($matches));
     }
 
-    private function findEnvVariable ()
+    private function findEnvVariable()
     {
         preg_match(
-            "/{$this->key}=(.+)$/m", 
-            $this->getCurrentEnvFileContents(), 
+            "/{$this->key}=(.+)$/m",
+            $this->getCurrentEnvFileContents(),
             $matches
         );
         return $matches;
     }
 
-    private function getCurrentEnvFileContents ()
+    private function getCurrentEnvFileContents()
     {
         return file_get_contents(
             $this->getEnvFilePath()
         );
     }
 
-    private function getEnvFilePath ()
+    private function getEnvFilePath()
     {
         return app()->environmentFilePath();
     }
 
-    private function store ($env_file_content)
+    private function store($env_file_content)
     {
         $env_file = $this->getEnvFilePath();
         $fp = fopen($env_file, 'w');
@@ -123,8 +121,8 @@ class EnvironmentCommand extends Command
         fclose($fp);
     }
 
-    private function convertToEnvironmentValue ()
+    private function convertToEnvironmentValue()
     {
-        return (strpos($this->value, ' ') === false) ? $this->value : '"'.$this->value.'"';
+        return (strpos($this->value, ' ') === false) ? $this->value : '"' . $this->value . '"';
     }
 }

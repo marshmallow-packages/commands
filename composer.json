@@ -2,7 +2,7 @@
     "name": "marshmallow/commands",
     "description": "Verschillende handige commands.",
     "keywords": ["marshmallow"],
-    "homepage": "https://github.com/Marshmallow-Development/",
+    "homepage": "https://marshmallow.dev/",
     "type": "library",
     "license": "MIT",
     "authors": [
