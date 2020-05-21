@@ -1,10 +1,31 @@
 <?php
 
+/**
+ * Command to create Nova resources
+ *
+ * PHP version 7.4
+ *
+ * @category Commands
+ * @package  NovaResource
+ * @author   Stef van Esch <stef@marshmallow.dev>
+ * @license  MIT Licence
+ * @link     https://marshmallow.dev
+ */
+
 namespace Marshmallow\Commands\Console\Commands\Nova;
 
 use Illuminate\Console\Command;
 use Marshmallow\Commands\Traits\Stubs;
 
+/**
+ * Command to create Nova resource
+ *
+ * @category Commands
+ * @package  NovaResourceCommand
+ * @author   Stef van Esch <stef@marshmallow.dev>
+ * @license  MIT Licence
+ * @link     https://marshmallow.dev
+ */
 class ResourceCommand extends Command
 {
     use Stubs;
@@ -47,7 +68,12 @@ class ResourceCommand extends Command
         }
 
         if (file_exists($this->getStorePath())) {
-            if ($this->confirm('This resource already exists. Are you sure you wish to continue? This will override any changes you have made to the existing resource file.')) {
+            $file_exists_message = 'This resource already exists. ' .
+                                   'Are you sure you wish to continue? ' .
+                                   'This will override any changes you have made ' .
+                                   'to the existing resource file.';
+
+            if ($this->confirm($file_exists_message)) {
                 $this->storeFile();
             }
         } else {
