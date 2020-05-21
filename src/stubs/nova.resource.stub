@@ -1,48 +1,124 @@
 <?php
 
+/**
+ * Resource for Nova
+ *
+ * PHP version 7.4
+ *
+ * @category {{ resource_name }}
+ * @package  {{ package_name }}
+ * @author   Stef van Esch <stef@marshmallow.dev>
+ * @license  MIT Licence
+ * @link     https://marshmallow.dev
+ */
 namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Marshmallow\{{ package_name }}\Nova\{{ resource_name }} as Nova{{ resource_name }}Module;
 
+/**
+ * This class handles the behaviour of the
+ * nova resource for this model.
+ *
+ * @category {{ resource_name }}
+ * @package  {{ package_name }}
+ * @author   Stef van Esch <stef@marshmallow.dev>
+ * @license  MIT Licence
+ * @link     https://marshmallow.dev
+ */
 class {{ resource_name }} extends Nova{{ resource_name }}Module
 {
     // public static $model = 'Marshmallow\{{ package_name }}\Models\{{ resource_name }}';
     // public static $title = 'name';
     // public static $search = ['name'];
 
+    /**
+     * Fields for this resource. Extended by the fields
+     * that are default by the package
+     *
+     * @param Request $request Request object
+     *
+     * @return array Array of fields
+     */
     public function fields(Request $request)
     {
-        return array_merge(parent::fields($request), [
-            //
-        ]);
+        return array_merge(
+            parent::fields($request),
+            [
+                //
+            ]
+        );
     }
 
+
+    /**
+     * Cards for this resource. Extended by the cards
+     * that are default by the package
+     *
+     * @param Request $request Request object
+     *
+     * @return array Array of cards
+     */
     public function cards(Request $request)
     {
-        return array_merge(parent::cards($request), [
-            //
-        ]);
+        return array_merge(
+            parent::cards($request), [
+                //
+            ]
+        );
     }
 
+
+    /**
+     * Filters for this resource. Extended by the filters
+     * that are default by the package
+     *
+     * @param Request $request Request object
+     *
+     * @return array Array of filters
+     */
     public function filters(Request $request)
     {
-        return array_merge(parent::filters($request), [
-            //
-        ]);
+        return array_merge(
+            parent::filters($request), [
+                //
+            ]
+        );
     }
 
+
+    /**
+     * Lenses for this resource. Extended by the lenses
+     * that are default by the package
+     *
+     * @param Request $request Request object
+     *
+     * @return array Array of lenses
+     */
     public function lenses(Request $request)
     {
-        return array_merge(parent::lenses($request), [
-            //
-        ]);
+        return array_merge(
+            parent::lenses($request), [
+                //
+            ]
+        );
     }
 
+
+    /**
+     * Actions for this resource. Extended by the actions
+     * that are default by the package
+     *
+     * @param Request $request Request object
+     *
+     * @return array Array of actions
+     */
     public function actions(Request $request)
     {
-        return array_merge(parent::actions($request), [
-            //
-        ]);
+        return array_merge(
+            parent::actions($request), [
+                //
+            ]
+        );
     }
 }
