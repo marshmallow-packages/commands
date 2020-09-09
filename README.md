@@ -9,7 +9,10 @@ composer require marshmallow/commands
 ```
 
 ### Commands
-```
-env:set {key} {value}
-marshmallow:resource {resource_name?} {package_name?}
+```bash
+php artisan env:set {key} {value}
+php artisan marshmallow:resource {resource_name?} {package_name?}
+
+# Run all the cache clearing commands from Laravel
+php artisan marshmallow:clear
 ```

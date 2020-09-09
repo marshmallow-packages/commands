@@ -3,6 +3,7 @@
 namespace Marshmallow\Commands;
 
 use Illuminate\Support\ServiceProvider;
+use Marshmallow\Commands\Console\Commands\ClearCacheCommand;
 use Marshmallow\Commands\Console\Commands\EnvironmentCommand;
 use Marshmallow\Commands\Console\Commands\Nova\ResourceCommand;
 
@@ -30,8 +31,9 @@ class CommandsServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands(
                 [
-                EnvironmentCommand::class,
-                ResourceCommand::class,
+                    EnvironmentCommand::class,
+                    ResourceCommand::class,
+                    ClearCacheCommand::class,
                 ]
             );
         }
