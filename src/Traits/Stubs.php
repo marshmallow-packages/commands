@@ -54,6 +54,7 @@ trait Stubs
                 $stub_content
             );
         }
+
         return $stub_content;
     }
 }

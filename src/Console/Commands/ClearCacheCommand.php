@@ -14,6 +14,7 @@ class ClearCacheCommand extends Command
         'view:clear',
         'clear-compiled',
     ];
+
     /**
      * The name and signature of the console command.
      *

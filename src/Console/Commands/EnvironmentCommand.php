@@ -6,7 +6,9 @@ use Illuminate\Console\Command;
 
 class EnvironmentCommand extends Command
 {
-    private $key, $value;
+    private $key;
+
+    private $value;
 
     /**
      * The name and signature of the console command.
@@ -82,13 +84,14 @@ class EnvironmentCommand extends Command
 
     private function envVariableDoesNotExists()
     {
-        return (!$this->envVariableExists());
+        return (! $this->envVariableExists());
     }
 
     private function envVariableExists()
     {
         $matches = $this->findEnvVariable();
-        return (!empty($matches));
+
+        return (! empty($matches));
     }
 
     private function findEnvVariable()
@@ -98,6 +101,7 @@ class EnvironmentCommand extends Command
             $this->getCurrentEnvFileContents(),
             $matches
         );
+
         return $matches;
     }
 
