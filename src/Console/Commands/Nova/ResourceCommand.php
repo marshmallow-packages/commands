@@ -34,7 +34,7 @@ class ResourceCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'marshmallow:resource {resource_name?} {package_name?}';
+    protected $signature = 'marshmallow:resource {resource_name?} {package_name?} {--force}';
 
     /**
      * The console command description.
@@ -42,16 +42,6 @@ class ResourceCommand extends Command
      * @var string
      */
     protected $description = 'Create a Nova resource from our own stub';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * Execute the console command.
@@ -67,7 +57,7 @@ class ResourceCommand extends Command
             $package_name = $this->ask('What is the Package name?');
         }
 
-        if (file_exists($this->getStorePath())) {
+        if (! $this->option('force') && file_exists($this->getStorePath())) {
             $file_exists_message = 'This resource already exists. ' .
                                    'Are you sure you wish to continue? ' .
                                    'This will override any changes you have made ' .
