@@ -25,7 +25,7 @@ class CommandsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /**
+        /*
          * Commands
          */
         if ($this->app->runningInConsole()) {

@@ -1,15 +1,16 @@
 <?php
 
 /**
- * Command to create Nova resources
+ * Command to create Nova resources.
  *
  * PHP version 7.4
  *
  * @category Commands
- * @package  NovaResource
+ *
  * @author   Stef van Esch <stef@marshmallow.dev>
  * @license  MIT Licence
- * @link     https://marshmallow.dev
+ *
+ * @see     https://marshmallow.dev
  */
 
 namespace Marshmallow\Commands\Console\Commands\Nova;
@@ -18,13 +19,14 @@ use Illuminate\Console\Command;
 use Marshmallow\Commands\Traits\Stubs;
 
 /**
- * Command to create Nova resource
+ * Command to create Nova resource.
  *
  * @category Commands
- * @package  NovaResourceCommand
+ *
  * @author   Stef van Esch <stef@marshmallow.dev>
  * @license  MIT Licence
- * @link     https://marshmallow.dev
+ *
+ * @see     https://marshmallow.dev
  */
 class ResourceCommand extends Command
 {
@@ -35,7 +37,7 @@ class ResourceCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'marshmallow:resource {resource_name?} {package_name?}';
+    protected $signature = 'marshmallow:resource {resource_name?} {package_name?} {--force}';
 
     /**
      * The console command description.
@@ -45,33 +47,23 @@ class ResourceCommand extends Command
     protected $description = 'Create a Nova resource from our own stub';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle()
     {
-        if (! $resource_name = $this->argument('resource_name')) {
+        if (!$resource_name = $this->argument('resource_name')) {
             $resource_name = $this->ask('What is the Resource name?');
         }
-        if (! $package_name = $this->argument('package_name')) {
+        if (!$package_name = $this->argument('package_name')) {
             $package_name = $this->ask('What is the Package name?');
         }
 
-        if (file_exists($this->getStorePath())) {
-            $file_exists_message = 'This resource already exists. ' .
-                                   'Are you sure you wish to continue? ' .
-                                   'This will override any changes you have made ' .
+        if (!$this->option('force') && file_exists($this->getStorePath())) {
+            $file_exists_message = 'This resource already exists. '.
+                                   'Are you sure you wish to continue? '.
+                                   'This will override any changes you have made '.
                                    'to the existing resource file.';
 
             if ($this->confirm($file_exists_message)) {
@@ -83,7 +75,7 @@ class ResourceCommand extends Command
     }
 
     /**
-     * Execute storeFile
+     * Execute storeFile.
      *
      * @return mixed
      */
@@ -103,12 +95,12 @@ class ResourceCommand extends Command
     }
 
     /**
-     * Execute getStorePath
+     * Execute getStorePath.
      *
      * @return mixed
      */
     protected function getStorePath()
     {
-        return app_path() . '/Nova/' . $this->argument('resource_name') . '.php';
+        return app_path().'/Nova/'.$this->argument('resource_name').'.php';
     }
 }
