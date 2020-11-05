@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 class EnvironmentCommand extends Command
 {
     private $key;
+
     private $value;
 
     /**
@@ -82,14 +83,14 @@ class EnvironmentCommand extends Command
 
     private function envVariableDoesNotExists()
     {
-        return !$this->envVariableExists();
+        return (! $this->envVariableExists());
     }
 
     private function envVariableExists()
     {
         $matches = $this->findEnvVariable();
 
-        return !empty($matches);
+        return (! empty($matches));
     }
 
     private function findEnvVariable()
