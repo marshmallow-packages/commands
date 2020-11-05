@@ -53,10 +53,10 @@ class ResourceCommand extends Command
      */
     public function handle()
     {
-        if (! $resource_name = $this->argument('resource_name')) {
+        if (!$resource_name = $this->argument('resource_name')) {
             $resource_name = $this->ask('What is the Resource name?');
         }
-        if (! $package_name = $this->argument('package_name')) {
+        if (!$package_name = $this->argument('package_name')) {
             $package_name = $this->ask('What is the Package name?');
         }
 
