@@ -6,7 +6,8 @@ use Illuminate\Console\Command;
 
 class EnvironmentCommand extends Command
 {
-    private $key, $value;
+    private $key;
+    private $value;
 
     /**
      * The name and signature of the console command.
@@ -45,13 +46,12 @@ class EnvironmentCommand extends Command
         $str = $this->getCurrentEnvFileContents();
 
         if ($this->envVariableDoesNotExists()) {
-            /**
+            /*
              * Bestaat nog niet, dus we voegen hem toe.
              */
             $this->add();
         } else {
-
-            /**
+            /*
              * Bestaat al, dus we updaten hem.
              */
             $this->update();
@@ -64,7 +64,7 @@ class EnvironmentCommand extends Command
     {
         $env_file_content = $this->getCurrentEnvFileContents();
         $env_file_content .= "\n";
-        $env_file_content .= $this->key . '=' . $this->convertToEnvironmentValue();
+        $env_file_content .= $this->key.'='.$this->convertToEnvironmentValue();
         $this->store($env_file_content);
     }
 
@@ -74,7 +74,7 @@ class EnvironmentCommand extends Command
         $env_file_content = $this->getCurrentEnvFileContents();
         $env_file_content = str_replace(
             $matches[0],
-            $this->key . '=' . $this->convertToEnvironmentValue(),
+            $this->key.'='.$this->convertToEnvironmentValue(),
             $env_file_content
         );
         $this->store($env_file_content);
@@ -82,13 +82,14 @@ class EnvironmentCommand extends Command
 
     private function envVariableDoesNotExists()
     {
-        return (!$this->envVariableExists());
+        return !$this->envVariableExists();
     }
 
     private function envVariableExists()
     {
         $matches = $this->findEnvVariable();
-        return (!empty($matches));
+
+        return !empty($matches);
     }
 
     private function findEnvVariable()
@@ -98,6 +99,7 @@ class EnvironmentCommand extends Command
             $this->getCurrentEnvFileContents(),
             $matches
         );
+
         return $matches;
     }
 
@@ -123,6 +125,6 @@ class EnvironmentCommand extends Command
 
     private function convertToEnvironmentValue()
     {
-        return (strpos($this->value, ' ') === false) ? $this->value : '"' . $this->value . '"';
+        return (false === strpos($this->value, ' ')) ? $this->value : '"'.$this->value.'"';
     }
 }
