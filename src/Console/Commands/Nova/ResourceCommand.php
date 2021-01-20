@@ -101,6 +101,10 @@ class ResourceCommand extends Command
      */
     protected function getStorePath()
     {
+        if (! is_dir(app_path().'/Nova/')) {
+            mkdir(app_path().'/Nova/');
+        }
+
         return app_path().'/Nova/'.$this->argument('resource_name').'.php';
     }
 }

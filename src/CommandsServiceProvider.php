@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Marshmallow\Commands\Console\Commands\ClearCacheCommand;
 use Marshmallow\Commands\Console\Commands\EnvironmentCommand;
 use Marshmallow\Commands\Console\Commands\Nova\ResourceCommand;
+use Marshmallow\Commands\Console\Commands\GenerateCronScheduleCommand;
+use Marshmallow\Commands\Console\Commands\PackageStatusCommand;
 
 class CommandsServiceProvider extends ServiceProvider
 {
@@ -34,6 +36,8 @@ class CommandsServiceProvider extends ServiceProvider
                     EnvironmentCommand::class,
                     ResourceCommand::class,
                     ClearCacheCommand::class,
+                    GenerateCronScheduleCommand::class,
+                    PackageStatusCommand::class,
                 ]
             );
         }
