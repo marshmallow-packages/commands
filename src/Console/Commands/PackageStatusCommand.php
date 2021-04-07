@@ -46,11 +46,13 @@ class PackageStatusCommand extends Command
                 continue;
             }
 
-            if ($this->option('cs-fixer')) {
-                $this->checkCsFixerIsRemoved($repo);
-            } else if ($this->option('has-workflow')) {
-                $this->checkItHasWorkflow($repo, $this->option('has-workflow'));
-            } else {
+            $continue = $this->checkCsFixerIsRemoved($repo);
+
+            if ($continue) {
+                $continue = $this->checkItHasWorkflow($repo, 'php-syntax-checker');
+            }
+
+            if ($continue) {
                 $this->getGitStatus($repo);
             }
         }
@@ -93,16 +95,22 @@ class PackageStatusCommand extends Command
     {
         $exists = $this->checkWorkflowExists($repo, $workflow);
         if (! $exists) {
-            $this->addRepoToResultTable($repo, 'Does not exists');
+            $this->addRepoToResultTable($repo, "$workflow does not exists");
+            return false;
         }
+
+        return true;
     }
 
     protected function checkCsFixerIsRemoved($repo)
     {
         $exists = $this->checkWorkflowExists($repo, 'php-cs-fixer');
         if ($exists) {
-            $this->addRepoToResultTable($repo, 'Still exists');
+            $this->addRepoToResultTable($repo, 'php-cs-fixer should be removed');
+            return false;
         }
+
+        return true;
     }
 
     protected function getRepoName($repo)
