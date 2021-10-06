@@ -19,7 +19,7 @@ class PackageStatusCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'package:status
+    protected $signature = 'mm:status
                                 {--cs-fixer}
                                 {--has-workflow=}';
 
@@ -42,7 +42,7 @@ class PackageStatusCommand extends Command
 
         foreach ($composer_json->repositories as $repo) {
 
-            if (! isset($repo->symlink) || ! $repo->symlink) {
+            if (!isset($repo->symlink) || !$repo->symlink) {
                 continue;
             }
 
@@ -78,7 +78,7 @@ class PackageStatusCommand extends Command
 
     protected function addRepoToResultTable($repo, $description)
     {
-         $this->result_table[] = [
+        $this->result_table[] = [
             $this->getRepoName($repo),
             $description,
             $this->getRepoVersion($repo),
@@ -87,14 +87,14 @@ class PackageStatusCommand extends Command
 
     protected function checkWorkflowExists($repo, $workflow)
     {
-        $path = $this->getBasePath($repo) . '/.github/workflows/'. $workflow .'.yml';
+        $path = $this->getBasePath($repo) . '/.github/workflows/' . $workflow . '.yml';
         return file_exists($path);
     }
 
     protected function checkItHasWorkflow($repo, $workflow)
     {
         $exists = $this->checkWorkflowExists($repo, $workflow);
-        if (! $exists) {
+        if (!$exists) {
             $this->addRepoToResultTable($repo, "$workflow does not exists");
             return false;
         }
@@ -116,7 +116,7 @@ class PackageStatusCommand extends Command
     protected function getRepoName($repo)
     {
         $composer_file = $this->getBasePath($repo) . '/composer.json';
-        if (! file_exists($composer_file)) {
+        if (!file_exists($composer_file)) {
             return 'Unknown';
         }
 
@@ -128,18 +128,18 @@ class PackageStatusCommand extends Command
     {
         chdir($this->getBasePath($repo));
         $output = shell_exec('git tag');
-        if (! $output) {
+        if (!$output) {
             return 'n/a';
         }
 
         return collect(explode("\n", $output))->reject(function ($value) {
-            return ! $value;
+            return !$value;
         })->last();
     }
 
     protected function getGitStatusFromOutput($output, $repo)
     {
-        if (! $output) {
+        if (!$output) {
             return 'Not a git repo';
         }
 
