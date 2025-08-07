@@ -109,7 +109,7 @@ class GenerateCronScheduleCommand extends Command
             /**
              * We have matches, we now loop through them and get the corresponding
              * cron expression.
-             * @var [type]
+             * @var string $match
              */
             foreach ($matches[0] as $key => $match) {
 
